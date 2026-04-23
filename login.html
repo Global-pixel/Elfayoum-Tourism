@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول | فيوم سياحة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-sand-light: #FAF8F3;
+            --color-sand-dark: #E6D5B8;
+            --color-gold: #D4AF37;
+            --color-stone: #8B5A2B;
+            --color-text: #2F1B10;
+            --color-text-light: #5C4033;
+            --color-white: #FFFFFF;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Cairo', sans-serif; background: var(--color-sand-light); color: var(--color-text); min-height: 100vh; display: flex; flex-direction: column; }
+        
+        .auth-nav { background: var(--color-white); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--color-gold); }
+        .auth-nav .logo { font-size: 1.5rem; font-weight: 900; color: var(--color-stone); text-decoration: none; }
+        .auth-nav .logo span { color: var(--color-gold); }
+        .back-link { color: var(--color-stone); text-decoration: none; font-weight: 600; }
+        .back-link:hover { color: var(--color-gold); }
+
+        .auth-wrapper { flex: 1; display: flex; align-items: center; justify-content: center; padding: 2rem; }
+        .auth-card { background: var(--color-white); width: 100%; max-width: 420px; padding: 2.5rem; border-radius: 12px; box-shadow: 0 10px 30px rgba(139,90,43,0.12); border-top: 5px solid var(--color-gold); }
+        .auth-card h2 { text-align: center; color: var(--color-stone); margin-bottom: 1.5rem; font-size: 1.8rem; }
+        
+        .form-group { margin-bottom: 1.2rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--color-text-light); }
+        .form-group input { width: 100%; padding: 0.9rem; border: 2px solid #e0d5c5; border-radius: 8px; font-size: 1rem; font-family: 'Cairo', sans-serif; transition: 0.3s; }
+        .form-group input:focus { border-color: var(--color-gold); outline: none; box-shadow: 0 0 0 3px rgba(212,175,55,0.15); }
+        
+        .btn-submit { width: 100%; padding: 1rem; background: var(--color-stone); color: var(--color-white); border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Cairo', sans-serif; margin-top: 0.5rem; }
+        .btn-submit:hover { background: var(--color-gold); color: var(--color-text); }
+        
+        .auth-footer { text-align: center; margin-top: 1.5rem; font-size: 0.95rem; color: var(--color-text-light); }
+        .auth-footer a { color: var(--color-gold); font-weight: 700; text-decoration: none; }
+        .auth-footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 480px) { .auth-card { padding: 1.8rem; } .auth-card h2 { font-size: 1.5rem; } }
+    </style>
+</head>
+<body>
+    <nav class="auth-nav">
+        <a href="index.html" class="logo">🏛️ فيوم<span>سياحة</span></a>
+        <a href="index.html" class="back-link">← العودة للرئيسية</a>
+    </nav>
+
+    <div class="auth-wrapper">
+        <div class="auth-card">
+            <h2>تسجيل الدخول</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" required placeholder="example@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="password">كلمة المرور</label>
+                    <input type="password" id="password" required placeholder="********">
+                </div>
+                <button type="submit" class="btn-submit">دخول</button>
+            </form>
+            <div class="auth-footer">
+                ليس لديك حساب؟ <a href="register.html">إنشاء حساب جديد</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value.trim();
+            const pass = document.getElementById('password').value.trim();
+            
+            if(email && pass) {
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('userEmail', email);
+                const ret = localStorage.getItem('returnUrl') || 'index.html';
+                localStorage.removeItem('returnUrl');
+                window.location.href = ret;
+            }
+        });
+    </script>
+</body>
+</html>

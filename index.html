@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الفيوم للسياحة | اكتشف سحر الفيوم</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --color-sand-light: #FAF8F3;
+            --color-sand-dark: #E6D5B8;
+            --color-gold: #D4AF37;
+            --color-stone: #8B5A2B;
+            --color-text: #2F1B10;
+            --color-text-light: #5C4033;
+            --color-white: #FFFFFF;
+            
+            --shadow-card: 0 10px 30px rgba(139, 90, 43, 0.1);
+            --shadow-hover: 0 20px 40px rgba(139, 90, 43, 0.2);
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--color-sand-light);
+            color: var(--color-text);
+            line-height: 1.7;
+            background-image: radial-gradient(circle at 50% 50%, #fdfbf7 0%, #f4efe4 100%);
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* ===== Navbar ===== */
+        .navbar {
+            background: var(--color-white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid var(--color-gold);
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--color-stone);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span { color: var(--color-gold); }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            color: var(--color-text-light);
+            font-size: 1.05rem;
+        }
+
+        .nav-links a:hover { color: var(--color-gold); }
+
+        .auth-btn {
+            background: var(--color-stone);
+            color: var(--color-white);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .auth-btn:hover { background: var(--color-gold); }
+
+        /* ===== Hero Video Section ===== */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(47, 27, 16, 0.4), rgba(47, 27, 16, 0.7));
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            color: var(--color-white);
+            padding: 2rem;
+            max-width: 900px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 15px rgba(0,0,0,0.6);
+            border-bottom: 3px solid var(--color-gold);
+            display: inline-block;
+            padding-bottom: 15px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 35px;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .btn-explore {
+            background: var(--color-gold);
+            color: var(--color-text);
+            padding: 15px 45px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: inline-block;
+            border: 3px solid var(--color-gold);
+            cursor: pointer;
+            transition: all 0.3s;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .btn-explore:hover {
+            background: transparent;
+            color: var(--color-gold);
+            transform: scale(1.05);
+        }
+
+        /* ===== Intro Video Section (القسم التاني للفيديو) ===== */
+        .intro-video-section {
+            background: linear-gradient(135deg, var(--color-sand-dark) 0%, var(--color-sand-light) 100%);
+            padding: 60px 20px;
+        }
+
+        .intro-video-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+            border: 4px solid var(--color-gold);
+            background: #000;
+        }
+
+        .intro-video-box {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+
+        .intro-video-box video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .intro-video-title {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.5rem;
+            color: var(--color-stone);
+            font-weight: 600;
+        }
+
+        /* ===== Destinations Section ===== */
+        .section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--color-stone);
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title::before {
+            content: '✦';
+            display: block;
+            color: var(--color-gold);
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+        }
+
+        .destination-card {
+            background: var(--color-white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            cursor: pointer;
+            transition: all 0.4s;
+            border-top: 5px solid var(--color-gold);
+        }
+
+        .destination-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .destination-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .destination-card:hover .destination-image {
+            transform: scale(1.1);
+        }
+
+        .destination-info {
+            padding: 25px;
+        }
+
+        .destination-info h3 {
+            font-size: 1.6rem;
+            color: var(--color-stone);
+            margin-bottom: 12px;
+        }
+
+        .destination-info p {
+            color: var(--color-text-light);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .card-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--color-gold);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* ===== Services Section ===== */
+        .services {
+            background: linear-gradient(135deg, var(--color-sand-dark) 0%, var(--color-sand-light) 100%);
+            padding: 80px 20px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: var(--color-white);
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow-card);
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 5px solid var(--color-gold);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            color: var(--color-stone);
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: var(--color-text-light);
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            background: #1a0f09;
+            color: #999;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+        }
+
+        footer p {
+            font-size: 1rem;
+        }
+
+        /* ===== Animations ===== */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .hero-content p { font-size: 1.1rem; }
+            .nav-links { display: none; }
+            .destinations-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== Navbar ===== -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">🏛️ فيوم<span>سياحة</span></a>
+        <div class="nav-links">
+            <a href="#destinations">الوجهات</a>
+            <a href="#services">الخدمات</a>
+            <a href="#about">عن الفيوم</a>
+        </div>
+        <button class="auth-btn" id="authBtn">تسجيل الدخول</button>
+    </nav>
+
+    <!-- ===== Hero Section with Video (خلفية ميوتة) ===== -->
+    <header class="hero">
+        <div class="hero-video-container">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="images/intro-video.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-content">
+            <h1>اكتشف سحر وجبال الفيوم الخفي</h1>
+            <p>رحلة عبر الزمن والطبيعة في واحدة من أجمل الواحات المصرية</p>
+            <a href="#destinations" class="btn-explore" data-protected>ابدأ الاستكشاف</a>
+        </div>
+    </header>
+
+    <!-- ===== Intro Video Section (نفس الفيديو لكن مع تحكم) ===== -->
+    <section class="intro-video-section">
+        <div class="container">
+            <h2 class="section-title">جولة ترحيبية في الفيوم</h2>
+            <div class="intro-video-wrapper">
+                <div class="intro-video-box">
+                    <video controls loop>
+                        <source src="images/intro-video.mp4" type="video/mp4">
+                        المتصفح لا يدعم تشغيل الفيديو
+                    </video>
+                </div>
+            </div>
+            <p class="intro-video-title">شاهد فيديو تعريفي عن أجمل معالم الفيوم 🎬</p>
+        </div>
+    </section>
+
+    <!-- ===== Destinations Section ===== -->
+    <section id="destinations" class="section">
+        <h2 class="section-title">أشهر المعالم السياحية</h2>
+        
+        <div class="destinations-grid">
+            <a href="places/madinet-madi.html" class="destination-card" data-protected>
+                <img src="images/madinet-madi-thumb.jpeg" alt="مدينة ماضي" class="destination-image">
+                <div class="destination-info">
+                    <h3>مدينة ماضي الأثرية</h3>
+                    <p>آثار الدولة الوسطى وبوابات حجرية شامخة وسط الرمال</p>
+                    <span class="card-link">اكتشف المزيد ←</span>
+                </div>
+            </a>
+
+            <a href="places/enchanted-lake.html" class="destination-card" data-protected>
+                <img src="images/enchanted-lake-thumb.jpeg" alt="البحيرة المسحورة" class="destination-image">
+                <div class="destination-info">
+                    <h3>البحيرة المسحورة</h3>
+                    <p>شلالات طبيعية فريدة وبيئة برية ساحرة في وادي الريان</p>
+                    <span class="card-link">اكتشف المزيد ←</span>
+                </div>
+            </a>
+
+            <a href="places/waterwheels.html" class="destination-card" data-protected>
+                <img src="images/waterwheels-thumb.jpeg" alt="السواقي" class="destination-image">
+                <div class="destination-info">
+                    <h3>السواقي الخشبية</h3>
+                    <p>تراث ري عريق يروي قصة الزراعة الفيومية منذ آلاف السنين</p>
+                    <span class="card-link">اكتشف المزيد ←</span>
+                </div>
+            </a>
+
+            <a href="places/gabal-mudawara.html" class="destination-card" data-protected>
+                <img src="images/gabal-mudawara-thumb.jpeg" alt="جبل مدورة" class="destination-image">
+                <div class="destination-info">
+                    <h3>جبل مدورة</h3>
+                    <p>أعلى نقطة في الفيوم مع إطلالة بانورامية خلابة على المدينة</p>
+                    <span class="card-link">اكتشف المزيد ←</span>
+                </div>
+            </a>
+
+            <a href="places/waterfalls.html" class="destination-card" data-protected>
+                <img src="images/waterfalls-thumb.jpeg" alt="شلالات الفيوم" class="destination-image">
+                <div class="destination-info">
+                    <h3>شلالات الفيوم</h3>
+                    <p>الشلالات الطبيعية الوحيدة في مصر وسط الصحراء الذهبية</p>
+                    <span class="card-link">اكتشف المزيد ←</span>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- ===== Services Section ===== -->
+    <section id="services" class="services">
+        <h2 class="section-title">خدماتنا السياحية</h2>
+        
+        <div class="services-grid">
+            <div class="service-card" data-protected onclick="handleServiceClick('booking-trip.html')">
+                <div class="service-icon">🚌</div>
+                <h3>حجز رحلات</h3>
+                <p>رحلات يومية وأسبوعية بأفضل الأسعار مع مواصلات مريحة</p>
+            </div>
+
+            <div class="service-card" data-protected onclick="handleServiceClick('booking-car.html')">
+                <div class="service-icon">🚗</div>
+                <h3>تأجير سيارات</h3>
+                <p>سيارات حديثة مع أو بدون سائق خاص لرحلتك</p>
+            </div>
+
+            <div class="service-card" data-protected onclick="handleServiceClick('booking-guide.html')">
+                <div class="service-icon">👨‍🏫</div>
+                <h3>مرشد سياحي</h3>
+                <p>جولات متخصصة مع خبراء آثار وطبيعة محترفين</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Footer ===== -->
+    <footer>
+        <p>جميع الحقوق محفوظة © 2026 فيوم سياحة | صمم بحب للتراث والطبيعة</p>
+        <p style="margin-top: 10px; font-size: 0.9rem;">📧 info@fayoum-tourism.com | 📞 01234567890</p>
+    </footer>
+
+    <!-- ===== JavaScript ===== -->
+    <script>
+        function updateAuthUI() {
+            const btn = document.getElementById('authBtn');
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const userEmail = localStorage.getItem('userEmail');
+            if (isLoggedIn) {
+                btn.textContent = userEmail ? `خروج (${userEmail})` : 'تسجيل خروج';
+                btn.onclick = logout;
+            } else {
+                btn.textContent = 'تسجيل الدخول';
+                btn.onclick = () => window.location.href = 'login.html';
+            }
+        }
+
+        document.querySelectorAll('[data-protected]').forEach(element => {
+            element.addEventListener('click', function(e) {
+                const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+                if (!isLoggedIn) {
+                    e.preventDefault();
+                    let targetPage = this.tagName === 'A' ? this.getAttribute('href') : 
+                        (this.getAttribute('onclick') ? this.getAttribute('onclick').match(/'([^']+)'/)[1] : this.closest('a')?.getAttribute('href'));
+                    if (targetPage) localStorage.setItem('returnUrl', targetPage);
+                    window.location.href = 'login.html';
+                }
+            });
+        });
+
+        function handleServiceClick(page) {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            if (!isLoggedIn) {
+                localStorage.setItem('returnUrl', page);
+                window.location.href = 'login.html';
+            } else {
+                alert('سيتم تحويلك لصفحة الحجز: ' + page);
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userEmail');
+            window.location.reload();
+        }
+
+        window.onload = function() {
+            updateAuthUI();
+            const returnUrl = localStorage.getItem('returnUrl');
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            if (isLoggedIn && returnUrl && returnUrl !== 'index.html') {
+                localStorage.removeItem('returnUrl');
+                window.location.href = returnUrl;
+            }
+        };
+    </script>
+
+</body>
+</html>
